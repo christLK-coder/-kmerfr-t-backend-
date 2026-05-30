@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: kmerfret-backend
+
+  datasource:
+    url: jdbc:postgresql://[::1]:5433/kmerfret
+    username: kmerfret
+    password: kmerfret2024
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate          # NE PAS recréer — schéma déjà créé par init.sql
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  jackson:
+    time-zone: Africa/Douala
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: 8081
+
+app:
+  jwt:
+    secret: KmerFretSuperSecretKey2024DoualaKribiCameroon256BitsLong!!
+    expiration-ms: 86400000       # 24h
+    refresh-expiration-ms: 604800000  # 7 jours
+
+logging:
+  level:
+    cm.kmerfret: DEBUG
+    org.hibernate.SQL: WARN

@@ -1,0 +1,16 @@
+﻿target/
+*.log
+*.tmp
+.idea/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+*.class
+application-local.yml
+application-prod.yml
+google-play-key.json
+backend.log
+backend-err.log
+app.log
+app-err.log
