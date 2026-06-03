@@ -1,0 +1,87 @@
+spring:
+  application:
+    name: kmerfret-backend
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/kmerfret}
+    username: ${DB_USERNAME:kmerfret}
+    password: ${DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  jackson:
+    time-zone: Africa/Douala
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+server:
+  port: 8081
+  address: 0.0.0.0
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-in-production}
+    expiration-ms: 86400000
+    refresh-expiration-ms: 604800000
+
+  biometric:
+    validity-days: 30
+
+  otp:
+    expiration-minutes: 10
+    length: 6
+
+  stripe:
+    secret-key: ${STRIPE_SECRET_KEY:}
+    publishable-key: ${STRIPE_PUBLISHABLE_KEY:}
+    webhook-secret: ${STRIPE_WEBHOOK_SECRET:}
+    currency: XAF
+
+  monetbill:
+    service-key: ${MONETBILL_SERVICE_KEY:}
+    service-secret: ${MONETBILL_SERVICE_SECRET:}
+    payment-url: https://api.monetbill.com/v2.1/payment/pay
+    check-url: https://api.monetbill.com/v2.1/payment/checkPayment
+    notify-url: ${APP_BASE_URL:http://localhost:8081}/api/payments/webhook/monetbill
+
+  push:
+    expo-url: https://exp.host/--/api/v2/push/send
+
+logging:
+  level:
+    cm.kmerfret: DEBUG
+    org.hibernate.SQL: WARN
+    org.hibernate.orm.deprecation: ERROR
+    org.springframework.security.config: ERROR
+    org.springframework.web: WARN
+    org.springframework.web.socket: WARN
